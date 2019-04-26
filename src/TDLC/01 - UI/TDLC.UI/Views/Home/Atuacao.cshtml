@@ -1,0 +1,62 @@
+﻿@model TDLC.UI.Models.AreaAtuacaoSiteViewmodel
+
+
+@{
+    ViewBag.Title = "Atuação";
+}
+
+
+
+<section class="contato-home" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("ATUACAO_IMG_HEADER"))'>
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+
+
+
+@foreach (var item in Model.Areas.Where(x => !x.id_pai.HasValue).OrderBy(x => x.Ordem).ToList())
+{
+
+
+    <section class='interna-com area-atuacao @(item.Destaque ? "area-atuacao-destaque" : "") '>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content">
+                        <h4 class="txt-atuacao-nome txt-titulo1">@item.Nome</h4>
+                    </div>
+                </div>
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <p class="chamada-area-atuacao justificado">@Html.Raw(item.Conteudos[0].Conteudo)</p>
+
+                    @if (item.Destaque)
+                    {
+                        <br />
+                        <a href='@Url.Action("areaatuacao", new {  id= item.id_areatuacao })' class="btn-saibamais">Saiba Mais <span class="glyphicon glyphicon-chevron-right "></span></a>
+          
+                    }
+
+
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+}
+
+
+
+
+

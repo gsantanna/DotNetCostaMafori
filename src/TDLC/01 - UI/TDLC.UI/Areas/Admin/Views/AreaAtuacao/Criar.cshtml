@@ -1,0 +1,269 @@
+﻿@model TDLC.UI.Areas.Admin.Models.ViewModels.AreaAtuacaoViewmodel
+
+@{
+    ViewBag.Title = "Adicionar Área de Atuação";
+}
+
+<h2>Adicionar Área de Atuação</h2>
+
+
+@using (Html.BeginForm("Criar", "AreaAtuacao", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    <div class="form-horizontal text-left">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <br />
+        <h4>Dados principais</h4>
+        <p>Selecione (topo) caso esteja criando uma área principal. </p>
+        <hr />
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_pai, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+            <div class="col-md-10">
+                @Html.DropDownList("id_pai", (IEnumerable<SelectListItem>)ViewBag.id_pai, "Topo", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_pai, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Ordem, htmlAttributes: new { @class = "control-label col-md-2", @style = "" })
+            <div class="col-md-1">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Ordem,  new { htmlAttributes = new { @class = "", @style = "margin-left:0px !important;width:50px" } })
+                    @Html.ValidationMessageFor(model => model.Ordem, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>       
+
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Destaque, htmlAttributes: new { @class = "control-label col-md-2", @style = "" })
+            <div class="col-md-1">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Destaque, new { htmlAttributes = new { @class = "", @style = "margin-left:0px !important" } })
+                    @Html.ValidationMessageFor(model => model.Destaque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+        <br />
+
+        <h4>Imagem</h4>
+        <hr />
+
+        @Html.HiddenFor(model => model.Imagem)
+
+
+        <div class="row box-upload" style="border-bottom:1px solid #dbdbdb; padding-bottom:20px;display:none; ">
+            <div class="col-md-6" style="vertical-align:middle;padding-left:10px;padding-top:10px">
+                <div class="form-group" style="margin-left:0px;margin-top:0px;">
+                    <label for="ArqImagem">Imagem Área</label>
+                    <input type="file" id="ArqImagem" name="ArqImagem" style="max-width:100%;" class="fl_imagens">
+                    <p class="help-block">Imagem 351x120 é exibida na área interna superior</p>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-right ">
+                <canvas id="ArqImagem_thumb" style="width:351px;height:120px"></canvas>
+            </div>
+
+
+        </div>
+
+
+        <h4>Informações</h4>
+        <hr />
+
+        <!-- cabecalho linguas -->
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (TDLC.Infra.Entities.Linguagem l in ViewBag.langs)
+            {
+                var tmpClasse = (ViewBag.langs as List<TDLC.Infra.Entities.Linguagem>).IndexOf(l) == 0 ? "active" : ""; //se for o primeiro item ele seta como active
+                <li role="presentation" class="@tmpClasse"><a href="#tab_@l.id_linguagem" aria-controls="tab_@l.id_linguagem" role="tab" data-toggle="tab">@l.Nome</a></li>
+            }
+        </ul>
+
+        <!-- corpo linguas -->
+        <div class="tab-content">
+
+            @foreach (TDLC.Infra.Entities.Linguagem l in ViewBag.langs)
+                {
+                    var indice = (ViewBag.langs as List<TDLC.Infra.Entities.Linguagem>).IndexOf(l);
+
+                @Html.HiddenFor(model => model.Conteudos[indice].id_conteudoareatuacao)
+                @Html.HiddenFor(model => model.Conteudos[indice].id_areaatuacao)
+
+                <input type="hidden" id='Conteudos[@indice].id_linguagem' name='Conteudos[@indice].id_linguagem' value='@l.id_linguagem' />
+
+
+
+
+
+                var tmpClasse = (indice == 0) ? "active" : ""; //se for o primeiro item ele seta como active
+                <div role="tabpanel" class='tab-pane @tmpClasse ' id="tab_@l.id_linguagem" style="">
+
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Nome, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Nome, new { htmlAttributes = new { @class = "form-control campotitulo" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Nome, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Chamada, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Chamada, new { htmlAttributes = new { @class = "form-control", @style = "max-width:100%;width:100%" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Chamada, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Conteudo, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Conteudos[indice].Conteudo, new { @class = "form-control", @style = "max-width:100%;width:100%;height:200px;" })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Conteudo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+            }
+        </div>
+        <!-- fim corpo linguas-->
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "Index")
+</div>
+
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript" src="~/Scripts/util.js"></script>
+
+    <script type="text/javascript">
+
+        var urlBase = '@Url.Content("~/Content/Uploads/")';
+
+
+        $(document).ready(function () {
+            //cria o event handler do change dos thumbs
+            $(".fl_imagens").change(gerathumb);
+
+            setTimeout(carregathumb, 100);
+
+
+            $("#Ordem").val($("#Ordem").val() * 1);
+
+        });
+
+
+        //Atualiza os thumbnails iniciais
+        var carregathumb = function () {
+            //ArqFotoPopup_thumb
+            var arrMontagem = ["Imagem"];
+
+            $(arrMontagem).each(function (idx, obj) {
+
+
+                var canvas = document.getElementById("Arq" + obj + "_thumb");
+                var ctx = canvas.getContext('2d');
+                var img = new Image();
+                img.onload = function () {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+
+                    //drawImageProp(ctx, img, 0, 0, 300, 400);
+
+
+                };
+                img.src = urlBase + $("#" + obj + "").val() + "?" + (new Date()).getTime();
+
+
+
+            });
+
+
+        }
+
+        var gerathumb = function (e) {
+
+            var id_controle = e.target.id;
+
+            var canvas = document.getElementById(id_controle + "_thumb");
+
+            var ctx = canvas.getContext('2d');
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var img = new Image();
+                img.onload = function () {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = event.target.result;
+
+
+            }
+            reader.readAsDataURL(e.target.files[0]);
+
+        }
+
+
+
+        //no change de todos os títulos, preenche os vazios com o título similar ao original
+        $(".campotitulo").change(function (e) {
+
+            $(".campotitulo").each(function (idx, obj) {
+                if (typeof ($(obj).val()) == 'undefined' || $(obj).val() == "") {
+                    $(obj).val($(e.target).val());
+                }
+            })
+        })
+
+    </script>
+
+
+
+}

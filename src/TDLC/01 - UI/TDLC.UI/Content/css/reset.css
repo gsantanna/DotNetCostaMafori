@@ -1,0 +1,63 @@
+/* Reset codes */
+@font-face {
+    font-family: 'latolight';
+    src: url('../fonts/lato-light-webfont.woff2') format('woff2'),
+         url('../fonts/lato-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+ol{
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+*{
+	box-sizing:border-box;
+}
+body{
+    font-family: 'latolight';
+	line-height:30px;
+	position:relative
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p{
+	margin:0px;
+}
+ul {
+    list-style: none;
+    margin-bottom: 0;
+	padding: 0px;
+}
+button,
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    border: none;
+    outline: 0;
+	outline-offset: 0px;
+}
+button:focus{
+	outline:0px;
+}
+input:focus,input:active{
+    outline: none;
+}
+.navbar-brand:focus, .navbar-brand:hover {
+    color: inherit;
+}
+.navbar .navbar-toggle {
+    border-color: #ddd;
+	margin-top: 0px;
+}
+.navbar .navbar-toggle .icon-bar {
+    background-color: #888;
+}
+.navbar .navbar-toggle:focus, .navbar .navbar-toggle:hover {
+    background-color: #ddd;
+}

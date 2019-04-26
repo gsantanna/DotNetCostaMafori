@@ -1,0 +1,30 @@
+﻿
+
+
+
+
+
+<ul class="nav navbar-nav navbar-right nav_lang">
+
+
+
+ 
+
+    <li class='@(Convert.ToString(Session["cultura"]) == "pt_BR" || string.IsNullOrEmpty( Convert.ToString( Session["cultura"]) ) ? "active" : ""   )'>
+
+
+        <a href='@Url.Content( string.Format("~/SetCulture?c={0}&a={1}&co={2}", "pt_BR",    ViewContext.RouteData.Values["action"],ViewContext.RouteData.Values["controller"] ))' title="BR"><img src="~/Content/Img/lang_br.png" alt=""></a>
+
+
+    </li>
+
+    <li class='@(Convert.ToString(Session["cultura"]) == "en_US" ? "active" : ""   )'>
+
+        <a href='@Url.Content( string.Format("~/SetCulture?c={0}&a={1}&co={2}", "en_US",    ViewContext.RouteData.Values["action"],ViewContext.RouteData.Values["controller"] ))' title="EN" alt=""><img src="~/Content/Img/lang_en.png" alt=""> </a>
+    </li>
+
+
+
+</ul>
+
+

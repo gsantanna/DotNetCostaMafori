@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "01 - UI", "01 - UI", "{5D261B60-EAF4-4C13-8954-DFC964CB98F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDLC.UI", "01 - UI\TDLC.UI\TDLC.UI.csproj", "{373584B4-761F-463B-885E-CE01D4D18B70}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TDLC.Infra", "02 - Infra\TDLC.Infra\TDLC.Infra.csproj", "{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "02 - Infra", "02 - Infra", "{AC385297-6C5B-4411-8D96-B1A27DE09DFC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{2C4BDBE2-FA05-4B4D-848E-BF4F20F4EBC4}"
+	ProjectSection(SolutionItems) = preProject
+		Bugs conhecidos.txt = Bugs conhecidos.txt
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{373584B4-761F-463B-885E-CE01D4D18B70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{373584B4-761F-463B-885E-CE01D4D18B70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{373584B4-761F-463B-885E-CE01D4D18B70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{373584B4-761F-463B-885E-CE01D4D18B70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{373584B4-761F-463B-885E-CE01D4D18B70} = {5D261B60-EAF4-4C13-8954-DFC964CB98F3}
+		{A9561BE4-43C2-4C6E-B610-DEC94D0F4D30} = {AC385297-6C5B-4411-8D96-B1A27DE09DFC}
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 3
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://rguimaraes.visualstudio.com/defaultcollection
+		SccProjectUniqueName0 = 02\u0020-\u0020Infra\\TDLC.Infra\\TDLC.Infra.csproj
+		SccProjectTopLevelParentUniqueName0 = TDLC\u0020-\u0020Costa\u0020Mafori.sln
+		SccProjectName0 = 02\u0020-\u0020Infra/TDLC.Infra
+		SccLocalPath0 = 02\u0020-\u0020Infra\\TDLC.Infra
+		SccProjectUniqueName1 = 01\u0020-\u0020UI\\TDLC.UI\\TDLC.UI.csproj
+		SccProjectTopLevelParentUniqueName1 = TDLC\u0020-\u0020Costa\u0020Mafori.sln
+		SccProjectName1 = 01\u0020-\u0020UI/TDLC.UI
+		SccLocalPath1 = 01\u0020-\u0020UI\\TDLC.UI
+		SccLocalPath2 = .
+	EndGlobalSection
+EndGlobal

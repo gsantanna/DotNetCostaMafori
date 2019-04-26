@@ -1,0 +1,80 @@
+﻿<!-- video area start -->
+<section class="video">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <video class="video-back" autoplay="" loop="" poster="~/Content/img/video.jpg">
+                    <source src='~/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("HOME_VIDEO")' type="video/mp4">
+                </video>
+                <div class="playpause"></div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="video-text-content text-uppercase">
+                    <p>
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_TXT_CONHECA"))
+                    </p>
+                    <a href="#define" class="video-down-link">
+                        <i class="fa fa-angle-down" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- define area start -->
+<section class="define" id="define">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 wow fadeInLeft">
+                <div class="define-content">
+                    <h2>
+
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_TXT_CHAMADA_01"))
+
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInRight">
+                <div class="define-content justificado">
+                    <h4>
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_TXT_CHAMADA_02"))
+                    </h4>
+                    <a href="/quemsomos">
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_BTN_SAIBA_MAIS_SOBRE_NOS"))
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- frase area start -->
+<section class="frase">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 wow fadeInLeft">
+                <div class="frase-content">
+                    <h2>
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_TXT_CHAMADA_03"))
+                    </h2>
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInRight">
+                <div class="frase-content justificado">
+                    <h4>
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_TXT_CHAMADA_04"))
+                    </h4>
+                    <a href='/atuacao'>
+                        @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "HOME_BTN_VEJA_NOSSAS_AREAS_DE_ATUACAO"))
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- footer area start -->

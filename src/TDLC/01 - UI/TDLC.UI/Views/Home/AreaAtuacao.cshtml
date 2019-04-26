@@ -1,0 +1,131 @@
+﻿@model TDLC.UI.Models.AreaAtuacaoSiteViewmodel
+
+
+@{
+    ViewBag.Title = Model.Areas.First().NomePai;
+}
+
+
+
+<section class="contato-home" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("ATUACAO_IMG_HEADER")); background-position: center;'>
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class='interna-com'>
+    <div class="container container-areatuacao">
+        <div class="row">
+
+            @foreach (var item in Model.Areas)
+            {
+
+                <div class="col-md-6  wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content item-area-box">
+
+                        <h4 class="txt-titulo1">@item.Nome</h4>
+                        <p class="conteudo">
+                            @item.Conteudos[0].Chamada
+                        </p><br>
+                        <div class="container-botao">
+                            <a href="javascript:void(0);" class="btn-saibamaisarea" data-toggle="modal" data-target="#modal-@item.id_areatuacao">
+                                Saiba mais <span class="glyphicon glyphicon-chevron-right "></span>
+                            </a>
+                        </div>
+
+
+
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="modal-@item.id_areatuacao" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <div class="vertical-alignment-helper">
+                                <div class="modal-dialog vertical-align-center">
+                                    <div class="modal-content">
+
+                                        <div class="modal-body">
+                                            <div class="conteudo-interno">
+
+                                                <div class="col-md-12">
+                                                    <button type="button" class="btn-fechar pull-right" data-dismiss="modal"></button>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <div class="txt-titulo2">Área de atuação:</div>
+                                                        <div class="txt-titulo1">@item.Nome</div>
+
+                                                    </div>
+
+                                                    <div class="col-md-8 justificado">
+                                                        @Html.Raw(item.Conteudos[0].Conteudo)
+                                                    </div>
+
+
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            }
+
+
+
+
+
+
+        </div>
+
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

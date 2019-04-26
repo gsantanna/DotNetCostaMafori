@@ -1,0 +1,156 @@
+﻿<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/font-awesome.min.css" media="all" />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css" media="all" />
+    <!-- Animate CSS -->
+    <link rel="stylesheet" href="~/Content/css/animate.min.css">
+    <!-- Reset CSS -->
+    <link rel="stylesheet" href="~/Content/css/reset.css">
+    <!-- Main style CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css" media="all" />
+    <!-- Responsive CSS -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/responsive.css" media="all" />
+
+
+    <link href="https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,600,700" rel="stylesheet">
+
+
+    <title>Costa Marfori  @ViewBag.Title </title>
+
+</head>
+<body>
+    <!-- header area start -->
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/">
+                        <img src="~/Content/img/logo.png" alt="" />
+                    </a>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right text-uppercase">
+                        <li class="dropdown mnu_escritorio">
+                            <a href="javascript:void(0);">O escritorio</a>
+                            <ul class="drop-menuu">
+                                <li>@Html.ActionLink("Quem somos", "quemsomos", controllerName: "home") </li>
+                                <li>@Html.ActionLink("Responsabilidade Social", "responsabilidadesocial", controllerName: "home") </li>
+                                <li>@Html.ActionLink("Equipe", "equipe", controllerName: "home")</li>
+                            </ul>
+                        </li>
+                        <li>@Html.ActionLink("Atuação", "Atuacao", controllerName: "home")</li>
+                        <li><a href='@Url.Content("~/Comunicacao/Noticias")'>Notícias</a> </li>
+                        <li class="dropdown mnu_biblioteca">
+                            <a href="#">biblioteca</a>
+                            <ul class="drop-menuu">
+                                <li><a href="/Comunicacao/informativos">Informativos</a></li>
+                                <li><a href="/Comunicacao/artigos">Artigos</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/Contato">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    @RenderBody()
+
+
+
+
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="footer-logo">
+                        <img src="~/Content/img/logo.png" alt="" />
+                    </div>
+                </div>
+                <div class="col-md-10">
+
+
+
+                    @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "ENDERECOS_HOME"))
+
+
+
+                    @*<div class="footer-list">
+                            <h3>RJ</h3>
+                            <ul>
+                                <li>
+                                    R. do Ouvidor 121 - 28 <i class="fa fa-circle-o" aria-hidden="true"></i>  &nbsp; Andar <br />
+                                    Centro - (21) 2526-7188
+                                </li>
+                                <li>
+                                    Av. das Americas 4200, bl. 9, sl. 220-A <br />
+                                    Barra da Tijuca - (21) 3553-9442
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="footer-list">
+                            <h3>SP</h3>
+                            <ul>
+                                <li>
+                                    R. Bela Cintra 904 - 1 <i class="fa fa-circle-o" aria-hidden="true"></i>  &nbsp; andar <br />
+                                    conj. 12 - Consolação - (11) 4064-8200
+
+                                </li>
+                            </ul>
+                        </div>*@
+                    <div class="footer-list">
+                        <h3>Siga-nos em:</h3>
+                        <div class="footer-list-icon">
+                            
+                            @*<a href="@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "LINK_FACEBOOK"))"><i class="fa fa-facebook" aria-hidden="true"></i></a>*@
+
+                            <a href="@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "LINK_LINKEDIN"))"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- jquery main JS -->
+    <script type="text/javascript" src="~/scripts/jquery.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script type="text/javascript" src="~/scripts/bootstrap.min.js"></script>
+    <!-- WOW JS -->
+    <script type="text/javascript" src="~/scripts/wow-1.3.0.min.js"></script>
+    <!-- main JS -->
+    <script type="text/javascript" src="~/scripts/main.js"></script>
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+    <script src="~/Scripts/util.js"></script>
+    <script>
+        document.onkeypress = bloquearCopia;
+        document.onkeydown = bloquearCopia;
+        document.oncontextmenu = mensagem;
+    </script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,5 @@
+
+1 - Linguagems tem que seguir a sequencia + o campo tá como identity Ex: PTBR 1 , EN 2  e etc...
+2 - Não deleta imagens quando deleta a publicação (fixed)
+
+

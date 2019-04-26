@@ -1,0 +1,238 @@
+﻿@model TDLC.UI.Models.PublicacoesSiteViewmodel
+
+
+
+
+
+@{
+    ViewBag.Title = "Notícias";
+}
+
+
+
+<section class="contato-home hidden-xs"  style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("NEWS_IMG_HEADER"))' >
+    
+
+
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+<section class="contato-home visible-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("NEWS_IMG_HEADER_MOBILE"))' >
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+<section class="interna-com">
+    <div class="container">
+
+        <div class="row">
+
+            @foreach (var item in Model.Destaques)
+            {
+                <div class="col-md-6 wow  nopad" style="visibility: visible; ">
+                    <div class="interna-com-content box-noticia">
+                        <h4 class="txt-titulo1 txt-titulo-noticia">
+
+                            <a href='@Url.Content(string.Format("~/comunicacao/noticias/{0}" ,   item.URL ))'>
+                                @item.Titulo
+                            </a>
+                        </h4>
+                        <p class="txt-conteudo-noticia">
+                            <a href='@Url.Content(string.Format("~/comunicacao/noticias/{0}" ,   item.URL ))'>
+                                @item.Conteudos[0].Destaque_Texto
+                            </a>
+                        </p>
+                    </div>
+                </div>
+            }
+        </div><!-- /row -->
+
+
+        <div class="row nospace">
+            @foreach (var item in Model.DestaquesMedio)
+            {
+                <div class="col-md-4 wow  nopad" style="visibility: visible; ">
+                    <div class="interna-com-content box-noticia-segundalinha">
+                        <h4 class="txt-titulo1 txt-titulo-noticia-segundalinha">
+                            <a href='@Url.Content(string.Format("~/comunicacao/noticias/{0}" , item.URL ))'>
+                                @item.Titulo
+                            </a>
+                        </h4>
+                    </div>
+                </div>
+            }
+        </div><!-- /row -->
+
+
+        <div class="row nospace">
+
+            <div class="col-md-12 wow " style="visibility: visible; ">
+
+                <div class="interna-com-content titulo-especial">
+                    <div class="txt-titulo1 nopad">Notícias Anteriores</div>
+                </div>
+
+
+
+                <ul class="list-news" style="min-height:289px;">
+
+                    @{
+                        int i = 0;
+                    }
+
+                    @foreach (var item in Model.Publicacoes.OrderByDescending(f => f.DataPublicacao))
+                    {
+
+                        <li class="list-news-item" style='display:@(i < 5  ? "block" : "none" )' data-pagina="@Math.Ceiling((i+1)/5.0)">
+
+                            <a href='@Url.Content(string.Format("~/comunicacao/noticias/{0}" ,   item.URL ))'>
+
+                                <div class="txt-noticias-anteriores">
+                                    <div class="txt-noticias-anteriores-titulo">@item.Titulo</div>
+
+                                    @item.Conteudos[0].Destaque_Texto
+                                </div>
+
+
+                            </a>
+                        </li>
+
+                        i++;
+                    }
+                </ul>
+
+
+
+                <nav aria-label="Page navigation" style='display:@(Model.Publicacoes.Count > 5 ? "block" : "none" ) '>
+                    <ul class="pagination">
+                        <li class="pagination-voltar">
+                            <a href="javascript:void(0);" id="btnPaginacaoVoltar" aria-label="Previous">
+                                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0)" id="btnPaginacaoAvancar" aria-label="Next">
+                                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+        </div><!-- /row -->
+
+    </div><!-- container -->
+
+
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+@*<a class="btn btn-default" href='@Url.Content(string.Format("~/comunicacao/{0}/{1}" ,  ViewBag.Tipo , Model.DestaqueTopo.URL ))' role="button">saiba mais <span class="ico type02" aria-hidden="true"></span></a>*@
+
+
+
+@section scripts
+{
+
+
+    <script type="text/javascript">
+
+
+        var mudaPagina = function (pagina) {
+            paginaAtual = pagina;
+            atualizaPager();
+        }
+
+        //desenha o paginador
+
+        $("#btnPaginacaoAvancar").click(function () {
+
+            paginaAtual++;
+            atualizaPager();
+
+        });
+
+        $("#btnPaginacaoVoltar").click(function () {
+
+            paginaAtual--;
+            atualizaPager();
+
+        });
+
+
+
+        var paginaAtual = 1;
+        var totalPaginas = 1;
+
+        $(document).ready(function () {
+            //calcula o total de páginas
+            totalPaginas = Math.ceil($(".list-news-item").length / 5.0);
+
+
+
+            var strItens = "";
+            for (i = 1; i <= totalPaginas; i++) {
+
+                strItens += "<li class='item-pager item-pager-" + i + "'><a href='javascript:void(0);'  onclick='mudaPagina(" + i + ")'>" + i + "</a></li>";
+
+            }
+
+            $(strItens).insertAfter(".pagination-voltar");
+
+            atualizaPager(true);
+
+        });
+
+
+        var atualizaPager = function (inicial) {
+            if (paginaAtual > totalPaginas) paginaAtual = 1;
+            if (paginaAtual < 1) paginaAtual = totalPaginas;
+
+
+            if (!inicial) {
+                $(".list-news-item").hide();
+                $(".list-news [data-pagina='" + paginaAtual + "']").fadeIn();
+            }
+
+            $(".item-pager").removeClass("active");
+            $(".item-pager-" + paginaAtual).addClass("active");
+        }
+
+
+    </script>
+
+
+}

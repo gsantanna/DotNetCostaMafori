@@ -1,0 +1,63 @@
+﻿[
+  {
+    "id": 1,
+    "configuracao": [
+      {
+        "arquivo": 1,
+        "nome": "Destaque Home Topo",
+        "descricao": "Tamanho: 176x192, exibida como miniatua na parte superior da home"
+      },
+      {
+        "arquivo": 2,
+        "nome": "Destaque Home",
+        "descricao": "Tamanho: 457x147, exibida abaixo do texto de chamada no destaque home (corpo)"
+      },
+      {
+        "arquivo": 3,
+        "nome": "Destaque Interna (Grande superior esquerda)",
+        "descricao": "Tamanho: 655x386, exibida ao clicar na publicação na parte superior esquerda da tela."
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "configuracao": [
+      {
+        "arquivo": 1,
+        "nome": "Destaque Home Topo",
+        "descricao": "Tamanho: 176x192, exibida como miniatua na parte superior da home"
+      },
+      {
+        "arquivo": 2,
+        "nome": "Destaque Home",
+        "descricao": "Tamanho: 457x147, exibida abaixo do texto de chamada no destaque home (corpo)"
+      },
+      {
+        "arquivo": 3,
+        "nome": "Destaque Interna (Grande superior esquerda)",
+        "descricao": "Tamanho: 655x386, exibida ao clicar na publicação na parte superior esquerda da tela."
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "configuracao": [
+      {
+        "arquivo": 1,
+        "nome": "Destaque Home Topo",
+        "descricao": "Tamanho: 176x192, exibida como miniatua na parte superior da home"
+      },
+      {
+        "arquivo": 2,
+        "nome": "Destaque Home",
+        "descricao": "Tamanho: 457x147, exibida abaixo do texto de chamada no destaque home (corpo)"
+      },
+      {
+        "arquivo": 3,
+        "nome": "Destaque Interna (Grande superior esquerda)",
+        "descricao": "Tamanho: 655x386, exibida ao clicar na publicação na parte superior esquerda da tela."
+      }
+    ]
+  }
+
+]

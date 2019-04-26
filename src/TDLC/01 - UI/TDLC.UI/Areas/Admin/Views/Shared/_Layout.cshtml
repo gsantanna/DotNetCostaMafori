@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administração</title>
+
+
+
+    
+    
+    
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Content/css/custom.min.css" rel="stylesheet" />
+    
+    <link href="~/Scripts/jquery.datatables/datatables.min.css" rel="stylesheet" />
+    
+
+    <link rel="stylesheet" href="~/Content/AdminSite.css" />
+
+
+
+
+
+
+    @Scripts.Render("~/bundles/modernizr")
+
+
+
+</head>
+<body>
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+
+
+                @if (Request.IsAuthenticated)
+                {
+
+                    <ul class="nav navbar-nav">
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString().ToUpper() == "HOME" ? "active" : "")">@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString().ToUpper()  == "PUBLICACOES" ? "active" : "")">@Html.ActionLink("Publicações", "Index", "Publicacoes")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString().ToUpper()  == "EQUIPE" ? "active" : "")">@Html.ActionLink("Equipe", "Index", "Equipe")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString().ToUpper()  == "AREAATUACAO" ? "active" : "")">@Html.ActionLink("Areas de Atuação", "Index", "AreaAtuacao")</li>
+                        <li class="@(ViewContext.RouteData.Values["Controller"].ToString().ToUpper()  == "INSTITUCIONAL" ? "active" : "")">@Html.ActionLink("Conteúdo Institucional", "Index", "Institucional")</li>
+                        
+
+
+                    </ul>
+
+                } 
+
+                @Html.Partial("_LoginPartial")
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - TDLC Administração - @Request.UserHostAddress </p>
+        </footer>
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/datatables")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+
+   
+
+
+
+
+    <script type="text/javascript" src="~/Scripts/util.js"></script>
+
+    <script src="~/scripts/tinymce/tinymce.min.js"></script>
+    <!-- Script to wire up your TinyMCE editor -->
+    <script type="text/javascript">
+
+        var InicializaEditorHtml = function () {
+            tinyMCE.init({
+                // General options
+                mode: "textareas",
+                language: 'pt_BR',
+                forced_root_block: "",
+                theme: "modern",
+                image_title: true,
+                automatic_uploads: true,
+                images_upload_url: '@Url.Content("~/admin/utility/upload")',
+                file_picker_types: 'image',
+                //  images_upload_base_path: '@Url.Content("~/Content/Uploads/Custom")',
+
+
+                plugins: [
+                    'advlist autolink lists link image charmap print preview hr anchor pagebreak',
+                    'searchreplace wordcount visualblocks visualchars code fullscreen',
+                    'insertdatetime media nonbreaking save table contextmenu directionality',
+                    'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
+                ],
+
+                // Theme options
+                theme_advanced_buttons1: "save,newdocument,|,bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,styleselect,formatselect,fontselect,fontsizeselect",
+                theme_advanced_buttons2: "cut,copy,paste,pastetext,pasteword,|,search,replace,|,bullist,numlist,|,outdent,indent,blockquote,|,undo,redo,|,link,unlink,anchor,image,cleanup,help,code,|,insertdate,inserttime,preview,|,forecolor,backcolor",
+                theme_advanced_buttons3: "tablecontrols,|,hr,removeformat,visualaid,|,sub,sup,|,charmap,emotions,iespell,media,advhr,|,print,|,ltr,rtl,|,fullscreen",
+                theme_advanced_buttons4: "insertlayer,moveforward,movebackward,absolute,|,styleprops,spellchecker,|,cite,abbr,acronym,del,ins,attribs,|,visualchars,nonbreaking,template,blockquote,pagebreak,|,insertfile,insertimage",
+                theme_advanced_toolbar_location: "top",
+                theme_advanced_toolbar_align: "left",
+                theme_advanced_statusbar_location: "bottom",
+                theme_advanced_resizing: true,
+
+                // Example content CSS (should be your site CSS)
+                content_css: '@Url.Content("~/Content/Css/style.css")',
+
+
+
+
+
+                // and here's our custom image picker
+                file_picker_callback: function (cb, value, meta) {
+                    var input = document.createElement('input');
+                    input.setAttribute('type', 'file');
+                    input.setAttribute('accept', 'image/*');
+                    input.onchange = function () {
+                        var file = this.files[0];
+                        var id = 'blobid' + (new Date()).getTime();
+                        var blobCache = tinymce.activeEditor.editorUpload.blobCache;
+                        var blobInfo = blobCache.create(id, file);
+                        blobCache.add(blobInfo);
+                        cb(blobInfo.blobUri(), { title: file.name });
+                    };
+
+                    input.click();
+                }
+
+
+
+
+
+
+            });
+
+
+        }
+
+
+        
+    </script>
+
+
+
+
+
+    @RenderSection("scripts", required: false)
+
+
+
+
+
+</body>
+</html>

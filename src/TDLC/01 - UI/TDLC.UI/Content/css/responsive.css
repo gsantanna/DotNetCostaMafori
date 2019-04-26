@@ -1,0 +1,167 @@
+@media only screen and (max-width:1199px){
+	.header .nav li:nth-child(6) {
+    margin-left: 20px;
+}
+
+.quemsomos-home-overlay {
+    margin: 0px 0px 0px 25px;
+    padding: 55px 35px 55px 35px;
+}
+
+.header .navbar-nav > li > a{
+	margin: 0px 18px 0px 0px;
+}
+.header .navbar > .container .navbar-brand{
+	margin: 5px 0px 0px 40px;
+}
+.rodape-home-overlay{
+	margin: 0px 0px 0px 25px;
+	padding: 55px 35px 55px 35px;
+}
+.rodape-com .row{
+	margin:0px;
+}
+
+
+
+
+}
+@media only screen and (max-width:991px){
+	.header .navbar > .container .navbar-brand{
+		margin:0px;
+	}
+	.header .nav li img{
+		padding: 10px 10px 0px 0px;
+	}
+	.header .nav li:nth-child(6) {
+		margin-left: 10px;
+	}
+	.header .navbar-nav > li > a{
+		margin: 0px 10px 0px 0px
+	}
+	.rodape-home-content h2{
+		margin-bottom:10px;
+	}
+	.rodape-home-overlay{
+		margin:0px;
+	}
+	.rodape-com-content {
+		margin: 0px 35px 35px;
+	}
+	.footer-logo{
+		max-width: 180px;
+		margin: 0px auto 20px;
+	}
+	.footer-list{
+		margin-left:0px;
+	}
+	.define-content h2,.frase-content h2{
+		width: 100%;
+		margin-bottom:15px
+	}
+}
+@media only screen and (max-width:767px){
+	.contato-home-head {
+		padding: 20px 15px;
+                background: rgba(10,10,10,0.7);
+	}
+	.contato-home {
+                 background: url('../img/mobile.jpg') no-repeat;
+                background-size: 100% 100%;
+		padding: 230px 0px 0px;
+	}
+        .define-content a {
+            margin-top: 22px;
+        }
+        .quemsomos-home{
+                background-size: 125% 100%;
+        }
+	.header .navbar > .container .navbar-brand{
+		padding: 5px 0px 0px 20px;
+	}
+	.header .navbar-nav > li{
+		padding: 0px 20px;
+	}
+	.header .navbar-nav > li > a {
+		border-bottom: 1px solid #5F677E;
+		padding: 18px 0px 15px;
+	}
+	.header .navbar-nav > li > a:hover{
+		border-bottom: 1px solid #5F677E;
+	}
+	.header .navbar-nav > li.activ a{
+		border-bottom: 1px solid #5F677E;
+	}
+	.header .nav-list-img a{
+		border:none !important;
+		display:none !important;
+	}
+	.header .navbar-nav > li:nth-child(6) {
+		margin-left: 0px;
+	}
+	.footer-list{
+		width:100%;
+		margin-bottom: 30px;
+		padding-left: 30px;
+	}
+	.footer-list h3{
+		max-width:350px;
+	}
+	.define-content h4,.frase-content h4{
+		margin:0px;
+	}
+	.frase-content a{
+		font-size: 20px;
+                margin-top: 20px;
+	}
+	.navbar .navbar-collapse{
+		position: absolute;
+		right:14px;
+		border-top: none;
+		width: 60%;
+		background: rgba(48,57,117,0.85);
+		top: 134%;
+		text-align: center;
+		border-left:1px solid #fff;
+		border-bottom:1px solid #fff;
+	}
+	.video{
+		margin:0px;
+	}
+	.playpause{
+		opacity:0.6;
+		display:block;
+		top:-75px;
+	}
+	.header .navbar-nav li ul li a{
+		color: #7BAAD4;
+		font-size: 14px;
+		border-bottom: 1px solid #5F677E;
+		padding: 18px 0px 15px;
+		display:block;
+	}
+	body{
+		padding-top:80px;
+	}
+
+}
+@media only screen and (max-width:400px){
+	.footer-list{
+		padding-left:10px;
+	}
+	.rodape-com-content h2{
+		font-size: 36px;
+		line-height: 40px
+	}
+	.rodape-com-content{
+		margin:0px 0px 35px;
+	}
+	.video-text-content{
+		font-size:16px;
+		padding-bottom: 1%;
+	}
+	.video-text-content a{
+		font-size: 50px;
+		line-height: 10px;
+	}
+}

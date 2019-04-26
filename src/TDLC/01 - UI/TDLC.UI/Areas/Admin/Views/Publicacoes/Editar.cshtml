@@ -1,0 +1,499 @@
+﻿@model TDLC.UI.Areas.Admin.Models.ViewModels.PublicacaoViewmodel
+
+@{
+    ViewBag.Title = "Editar publicação";
+}
+
+<h2>Editar publicação</h2>
+
+
+@using (Html.BeginForm("Editar", "Publicacoes", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+
+    @Html.AntiForgeryToken()
+
+
+    @Html.HiddenFor(x => x.id_publicacao);
+
+
+    <div class="form-horizontal text-left">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <br />
+        <h4>Dados Gerais</h4>
+        <hr />
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.id_tipopublicacao, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(x => x.id_tipopublicacao, (IEnumerable<SelectListItem>)ViewBag.tipos_publicacao, "-selecione-", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.id_tipopublicacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.URL, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.URL, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.URL, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DataPublicacao, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.DataPublicacao, new { htmlAttributes = new { @class = "form-control dtp" } })
+                @Html.ValidationMessageFor(model => model.DataPublicacao, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+
+        <div class="form-group" style="display:none;">
+            @Html.LabelFor(model => model.Destaque, htmlAttributes: new { @class = "control-label col-md-2", @style = "" })
+            <div class="col-md-1">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.Destaque)
+                    @Html.ValidationMessageFor(model => model.Destaque, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            @*@Html.LabelFor(model => model.DestaqueTopo, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-1">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.DestaqueTopo)
+                        @Html.ValidationMessageFor(model => model.DestaqueTopo, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+
+
+        </div>
+
+
+        <br />
+
+
+
+
+
+
+        <div class="form-group" style="">
+            @Html.LabelFor(model => model.ContemAnexo, htmlAttributes: new { @class = "control-label col-md-2", @style = "" })
+            <div class="col-md-1">
+                <div class="checkbox">
+                    @Html.EditorFor(model => model.ContemAnexo)
+                    @Html.ValidationMessageFor(model => model.ContemAnexo, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+        @Html.HiddenFor(x => x.Arquivo)
+
+        <div class="row box-upload" id="frmArquivo" style="margin-bottom:20px;border-bottom:1px solid #dbdbdb;display:none;">
+            <div class="col-md-6" style="vertical-align:middle;padding-left:10px;padding-top:10px;">
+                <div class="form-group" style="margin-left:0px;margin-top:0px;">
+                    <label for="ArquivoEnviado">Arquivo</label>
+                    <input type="file" id="ArquivoEnviado" name="ArquivoEnviado" style="max-width:100%;" class="fl_imagens">
+                    <p class="help-block">Este arquivo será anexado à publicação. </p>
+                </div>
+            </div>
+
+
+            <div class="col-md-4" style="padding-top:30px;text-align:left">
+
+                @if (Model.Arquivo != "")
+                {
+
+                    <a target="_blank" href='@Url.Content("~/Content/Uploads/" + Model.Arquivo) '>Clique aqui para visualizar o arquivo</a>
+
+                }
+            </div>
+
+        </div>
+
+
+        <h4>Textos e Imagens</h4>
+        <hr />
+
+        <!-- cabecalho linguas -->
+        <ul class="nav nav-tabs" role="tablist">
+            @foreach (TDLC.Infra.Entities.Linguagem l in ViewBag.langs)
+            {
+                var tmpClasse = (ViewBag.langs as List<TDLC.Infra.Entities.Linguagem>).IndexOf(l) == 0 ? "active" : ""; //se for o primeiro item ele seta como active
+                <li role="presentation" class="@tmpClasse"><a href="#tab_@l.id_linguagem" aria-controls="tab_@l.id_linguagem" role="tab" data-toggle="tab">@l.Nome</a></li>
+            }
+        </ul>
+
+        <!-- corpo linguas -->
+        <div class="tab-content">
+
+
+
+            @foreach (TDLC.Infra.Entities.Linguagem l in ViewBag.langs)
+            {
+
+
+
+
+                var indice = (ViewBag.langs as List<TDLC.Infra.Entities.Linguagem>).IndexOf(l);
+
+                var tmpClasse = (indice == 0) ? "active" : ""; //se for o primeiro item ele seta como active
+                <div role="tabpanel" class='tab-pane @tmpClasse ' id="tab_@l.id_linguagem" style="">
+                    @Html.HiddenFor(x => Model.Conteudos[indice].id_conteudopublicacao)
+
+
+                    <h5>Internos</h5>
+                    <hr />
+
+                    <input type="hidden" id='conteudos[@indice].id_linguagem' name='conteudos[@indice].id_linguagem' value='@l.id_linguagem' />
+
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Titulo, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Titulo, new { htmlAttributes = new { @class = "form-control campotitulo" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Titulo, "", new { @class = "text-danger" })
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Conteudo, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.TextAreaFor(model => model.Conteudos[indice].Conteudo, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.Conteudos[indice].Destaque_Categoria, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Destaque_Categoria, new { htmlAttributes = new { @class = "form-control txt_destaque_categoria " } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Destaque_Categoria, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Topo, htmlAttributes: new { @class = "control-label col-md-2 txt_destaque_titulo_home_topo", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Topo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Topo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Corpo, htmlAttributes: new { @class = "control-label col-md-2 txt_destaque_titulo_home_corpo", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Corpo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Destaque_Titulo_Home_Corpo, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                    <div class="form-group" style="display:none;">
+                        @Html.LabelFor(model => model.Conteudos[indice].Destaque_Titulo, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Destaque_Titulo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Destaque_Titulo, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Conteudos[indice].Destaque_Texto, htmlAttributes: new { @class = "control-label col-md-2 ", @style = "text-align:left" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.Conteudos[indice].Destaque_Texto, new { htmlAttributes = new { @class = "form-control", @style = "max-width:100%;width:100%;" } })
+                            @Html.ValidationMessageFor(model => model.Conteudos[indice].Destaque_Texto, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+
+                    <script type="application/json" id="imagens_@indice">
+                        @Html.Raw(Model.Conteudos[indice].JsonImagens)
+                    </script>
+
+                    <div id="dvImagens" style="display:none;">
+                        <br />
+                        <h5>Imagens</h5>
+                        <hr />
+                        <!-- Inicio Imagens -->
+                        <div id="dv_saida_conteudo_@indice" class="dv_saida_conteudo" data-lingua="@indice">
+
+                        </div>
+                        <!-- Fim Imagens -->
+                    </div>
+
+
+                </div>
+
+            }
+        </div>
+        <!-- fim corpo linguas-->
+
+
+
+
+
+
+        <br />
+
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Voltar para a lista", "Index")
+</div>
+
+
+
+<script type="application/html-template" id="template-item-imagem">
+    <div class="row box-upload">
+        <div class="col-md-6" style="vertical-align:middle;padding-left:10px;padding-top:10px;">
+            <div class="form-group" style="margin-left:0px;margin-top:0px;">
+                <label for="exampleInputFile">{{nome}}</label>
+                <input type="file" id="{{id}}" name="{{id}}" style="max-width:100%;" accept="image/*" class="fl_imagens {{id}}">
+                <p class="help-block">{{descricao}}.</p><br />
+
+                <button type="button" onclick='removerImagem("{{id}}")' class="btn btn-default btn-xs btn_remover"><span class="glyphicon glyphicon-delete" aria-hidden="true"></span> Remover</button>
+
+            </div>
+        </div>
+
+        <div class="col-md-6 text-center ">
+            <canvas id="{{id}}_thumb" style="width:95%;display:none;"></canvas>
+            <img id="{{id}}_img" class="{{id}}_img" src='@Url.Content("~/Content/Uploads/{{url}}")' style="width:95%;display:{{disp}}" />
+
+            <input type="hidden" name="{{id_imagem}}" id="{{id_imagem}}" value="{{url}}" class="{{id}}_hidden" /><!-- Esse hidden é pra bindar as imagens(endereço) no modelbinder -->
+
+        </div>
+
+    </div>
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+
+
+        var configArquivos = new Array();
+
+
+
+
+
+        $(document).ready(function () {
+
+            //bind atualizaarquivos no change do tpo publicacao
+            $("#id_tipopublicacao").change(function () {
+                atualizaArquivos();
+
+
+                $(".txt_destaque_categoria").val($("#id_tipopublicacao option:selected").text());
+
+
+            });
+
+
+            //carrega a configuracao e chama o atualizar arquivos
+            $.ajax({
+                url: '@Url.Content("~/Content/imgconfig.json")'
+            }).done(function (data, status) {
+                configArquivos = data;
+                atualizaArquivos();
+            });
+
+
+
+            $("#ContemAnexo").trigger("change");
+
+
+
+
+
+        });//rdy
+
+        var atualizaArquivos = function () {
+
+            $(".dv_saida_conteudo").html("<div class='carregando'></div>");
+
+            var id = $("#id_tipopublicacao").val();
+
+            if (typeof (id) == "undefined" || id <= 0) {
+                return;
+            } else { //algum tipo selecionado
+
+                $(".dv_saida_conteudo").html("<div class='carregando'>Carregando...</div>");
+                setTimeout(_atualizaArquivos, 100);
+            }
+        }
+        var _atualizaArquivos = function () {
+
+
+            var config = $.grep(configArquivos, function (o) { return o.id == $("#id_tipopublicacao").val(); })[0];
+
+
+            //Para cada container de arquivos...
+            $(".dv_saida_conteudo").each(function (idx, container) {
+
+                var htmlSaida = "";
+
+                //carrega as imagens referentes ao item
+                var arrImagens = JSON.parse($("#imagens_" + idx).html());
+
+
+
+
+
+                //Para cada tipo de arquivo na configuração
+                $(config.configuracao).each(function (idxc, configuracao) {
+
+                    //identifica o ID que o controle do upload deverá receber.
+                    var id_controle = "conteudos[" + $(container).attr("data-lingua") + "].Arquivo" + configuracao.arquivo;
+
+
+                    //verifica se há imagem
+                    var img = arrImagens[idxc];
+                    var id_imagem = "Conteudos[" + idx + "].Imagem" + (idxc + 1);
+
+                    htmlSaida += $("#template-item-imagem").html()
+                    .replace(/{{nome}}/g, configuracao.nome)
+                    .replace(/{{id}}/g, id_controle)
+                    .replace(/{{descricao}}/g, configuracao.descricao)
+                    .replace(/{{url}}/g, img)
+                    .replace(/{{disp}}/g, (typeof (img) != 'undefined' && img != "") ? "block" : "none")
+                    .replace(/{{id_imagem}}/g, id_imagem)
+                    ;
+
+
+
+
+                });//each configuracao
+
+                $(container).html(htmlSaida);
+
+            });//each container
+
+
+
+            //cria o event handler do change dos thumbs
+            $(".fl_imagens").change(gerathumb);
+
+        }//_atualizaarquivos
+
+
+        var gerathumb = function (e) {
+            var id_controle = e.target.id;
+            var canvas = document.getElementById(id_controle + "_thumb");
+            var ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                var img = new Image();
+                img.onload = function () {
+                    canvas.width = img.width;
+                    canvas.height = img.height;
+                    ctx.drawImage(img, 0, 0);
+                }
+                img.src = event.target.result;
+
+                //desativa a img referente ( imagem atual )
+                document.getElementById(id_controle + "_img").style.display = "none";
+
+
+                $(canvas).show();
+
+            }
+            reader.readAsDataURL(e.target.files[0]);
+        }
+
+
+
+
+        //trava o campo
+        document.getElementById('URL').onkeypress = function (e) {
+            if (("abcdefghijklmnopqrstuvwxyz-ABCDEEFHIJKLMNOPQRSTUVWXYZ1234567890").indexOf(String.fromCharCode(e.charCode)) === -1) {
+                e.preventDefault();
+                return false;
+            }
+        }
+
+
+
+
+        $("#ContemAnexo").change(function () {
+
+            if ($("#ContemAnexo").is(":checked")) {
+
+                $("#frmArquivo").show();
+
+
+            } else {
+                //Limpa o arquivo
+                $("#frmArquivo").hide();
+
+            }
+
+        });
+
+
+
+
+
+
+
+
+    </script>
+
+
+
+    <script src="~/Scripts/datetimepicker/jquery.datetimepicker.full.min.js"></script>
+    <link href="~/Scripts/datetimepicker/jquery.datetimepicker.min.css" rel="stylesheet" />
+
+    <script type="text/javascript">
+
+        $(".dtp").datetimepicker({
+            format: 'd/m/Y H:i:s',
+            lang: 'pt-BR',
+            closeOnDateSelect: true
+
+        });
+
+        $.datetimepicker.setLocale('pt-BR');
+
+        InicializaEditorHtml();
+
+    </script>
+
+    
+
+}

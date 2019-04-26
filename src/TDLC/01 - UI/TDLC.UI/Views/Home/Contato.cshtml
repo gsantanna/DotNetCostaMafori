@@ -1,0 +1,260 @@
+﻿@model TDLC.UI.Models.EquipeSiteViewmodel
+
+
+@{
+    ViewBag.Title = "Contato";
+}
+
+
+
+<section class="contato-home hidden-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("CONTATO_IMG_HEADER"))'>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+                <div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="contato-home visible-xs" style=''>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-11 col-md-offset-1">
+                <div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+<!-- rodape com area start -->
+<section class="rodape-com">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 wow slideInLeft">
+                
+                
+            
+
+
+
+                @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "ENDERECOS_CONTATO"))
+
+
+
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="contato-com-content wow slideInRight">
+
+
+
+
+
+
+                    @using (Html.BeginForm("Contato", "Home", FormMethod.Post, new { @id = "frmContato" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+
+                        <label>Nome Completo *</label><input type="text" name="nome" id="nome" class="c_nome" />
+                        <label>Informe seu e-mail *</label><input type="email" name="email" id="email" class="c_email" />
+                        <label>Telefone *</label><input type="text" name="telefone" id="telefone" class="c_telefone" />
+                        <label>Assunto *</label><input type="text" name="assunto" id="assunto" class="c_assunto" />
+                        <label>Mensagem *</label><textarea id="mensagem" name="mensagem" class="c_mensagem"></textarea>
+                        <button>Enviar<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- envie area start -->
+<section class="envie">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6">
+                <div class="envie-content wow slideInLeft">
+                    <h2>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "Contato_Curriculo_Titulo"))</h2>
+                    <h4 class="justificado">@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "Contato_Curriculo_Texto"))</h4>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-6">
+                <div class="envie-content wow slideInRight">
+
+
+
+                    @using (Html.BeginForm("Trabalheconosco", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "frmTrabalhe" }))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <label>Nome Completo *</label><input type="text" name="nome" class="t_nome" />
+                        <label>Informe seu e-mail *</label><input type="email" name="email" class="t_email" />
+                        <!--<div class="envie-input">
+                            <i class="fa fa-paperclip" aria-hidden="true"></i>
+                            <input class="" type="text" value="Anexe seu curriculo"/>
+                        </div> -->
+                        <div class="envie-input">
+                            <input type="file" name="arquivo" id="arquivo" />
+                            <p>Anexe seu curriculo<i class="fa fa-paperclip" aria-hidden="true"></i></p>
+                        </div>
+                        <button>Enviar<i class="fa fa-angle-right" aria-hidden="true"></i></button>
+
+
+
+
+                    }
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts
+{
+    <script type="text/javascript">
+        var mensagem = "";
+
+        @if(ViewBag.Origem == "T")
+        {
+           if(ViewBag.status =="OK")
+            {
+                @:mensagem = "Obrigado por enviar o currículo.";
+
+            } else
+            {
+                @:mensagem = '@ViewBag.Mensagem';
+                                                        }
+        }
+
+        @if(ViewBag.Origem == "C")
+           {
+               if(ViewBag.status =="OK")
+               {
+                   @:mensagem = "Obrigado pela sua mensagem!";
+
+               } else
+               {
+                   @:mensagem = '@ViewBag.Mensagem';
+                                                       }
+           }
+
+
+
+
+
+
+
+
+
+
+        if (mensagem != "") {
+            alert(mensagem);
+        }
+
+
+
+
+        $(document).ready(function () {
+
+            $("#frmContato").submit(function () {
+                var erro = "";
+
+                if ($(".c_nome").val().length < 10) erro += "Favor preencher o nome completo \n";
+                if (!validateEmail($(".c_email").val())) erro += "Favor preencher o email válido \n";
+                if ($(".c_telefone").val().length < 8) erro += "Telefone inválido \n";
+                if ($(".c_assunto").val().length < 10) erro += "Favor preencher o assunto \n";
+                if ($(".c_mensagem").val().length < 5) erro += "Favor preencher a mensagem \n";
+
+                if (erro != "") {
+                    alert(erro);
+                    return false;
+                } else { //ok
+                    return true;
+                }
+
+
+
+            });
+
+
+            $("#frmTrabalhe").submit(function () {
+                var erro = "";
+
+                if ($(".t_nome").val().length < 10) erro += "Favor preencher o nome completo \n";
+                if (!validateEmail($(".t_email").val())) erro += "Favor preencher o email válido \n";
+
+
+
+                if (document.getElementById("arquivo").files.length == 0) {
+                    erro += "Favor anexar o currículo no formatos RTF , DOC/DOCX ou PDF";
+                } else {
+                    var ext = (document.getElementById("arquivo").files[0].name.split('.')).slice(-1)[0];
+                    ext = ext.toLowerCase();
+
+
+                    if (!(ext == "doc" || ext == "docx" || ext == "pdf" || ext == "rtf")) {
+                        erro += "Favor anexar o currículo no formatos RTF , DOC/DOCX ou PDF";
+                    }
+
+                }
+
+
+
+
+
+
+                if (erro != "") {
+                    alert(erro);
+                    return false;
+                } else { //ok
+                    return true;
+                }
+
+
+
+            });
+
+
+
+
+
+
+
+        });
+
+
+
+        function validateEmail(email) {
+            var re = /^(([^<>()\[\]\\.,;:\s@@"]+(\.[^<>()\[\]\\.,;:\s@@"]+)*)|(".+"))@@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+        }
+
+
+
+
+    </script>
+
+}
+
+
+
+

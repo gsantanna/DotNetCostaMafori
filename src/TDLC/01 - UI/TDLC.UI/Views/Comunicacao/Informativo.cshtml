@@ -1,0 +1,285 @@
+﻿
+
+@{
+    ViewBag.Title = "Informativos";
+}
+
+
+
+
+    <section class="contato-home hidden-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("INFORMATIVO_IMG_HEADER"))'>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-11 col-md-offset-1">
+                    <div class="contato-home-head wow zoomIn">
+                        <h2>@ViewBag.Title</h2>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+<section class="contato-home visible-xs" style="background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("NEWS_IMG_HEADER_MOBILE"))">
+
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+<section class="interna-com colada top-line-bot ">
+    <div class="container">
+        <div class="row nopad nospace">
+
+            @if (((int[])ViewBag.Anos).Count() > 4)
+            {
+                <div class="col-sm-1">
+                    <a class="btn-nav scrollleft" href="javascript:void(0);">
+                        <i class="fa fa-angle-left" aria-hidden="true"></i>
+                    </a>
+                </div>
+            }
+
+            <div style="" class="text-nowrap col-md-10 scrollbar-anos ">
+                <nav class="lista-anos">
+                    <ul>
+                        @foreach (var ano in ViewBag.Anos)
+                        {
+                            <li><a class='@(ViewBag.Ano1 == ano  ? "ativo":"" ) ano_@ano' href="javascript:atualizaValores(@ano);">@ano</a></li>
+                        }
+                    </ul>
+                </nav>
+            </div>
+
+
+            @if (((int[])ViewBag.Anos).Count() > 8)
+            {
+                <div class="col-sm-1">
+                    <a class="btn-nav scrollright" href="javascript:void(0);">
+                        <i class="fa fa-angle-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            }
+        </div><!-- /row -->
+    </div>
+
+</section>
+
+
+
+<script type="application/htmltemplate" id="template-mes">
+    <h4 class="item-informativo-header"> <a href="javascript:void(0)">Informativo <span class="informativo-mes">{{mes}}</span></a></h4>
+</script>
+
+
+<script type="application/htmltemplate" id="template-item">
+    <div class="informativo">
+        
+            <a href='@Url.Content("~/comunicacao/informativos/"){{url}}'>{{titulo}}</a>
+    
+    </div>
+</script>
+
+
+
+
+
+
+<section class="interna-com nospace2">
+    <div class="container linha-top">
+        <div class="row">
+            <div class="col-md-12 wow nopad" style="visibility: visible; ">
+               
+                    <div id="dvSaida" class="containerfixo"></div>
+               
+            </div>
+        </div>
+
+
+    </div>
+</section>
+
+
+@section scripts
+{
+
+    <script src="~/Scripts/jquery-ui-1.12.1.custom/jquery-ui.min.js"></script>
+
+    <style type="text/css">
+        .ui-accordion-header   {
+            background-color: transparent;
+            background-image: url('../../Content/img/destaque-bullet.png');
+            background-repeat: no-repeat;
+            color: #9d9d9d;
+            font-size: 25px !important;
+            margin-top: 20px;
+            border: none !important;
+            padding-top: 6px !important;
+            padding-left: 25px !important;
+            cursor: pointer;
+            cursor: hand;
+            min-height: 39px;
+            font-weight: 300;
+            font-family: Lato;
+        }
+		.ui-accordion-header a, .informativo a {
+		            color: #9d9d9d;
+		}
+		
+		.ui-accordion-header a:hover , .informativo a:hover {
+		            color:#337ab7 !important;
+		}
+		
+		
+		.ui-accordion-header  :hover , .item-informativo-header : hover, item-informativo-header : hover {
+			color:#337ab7 !important;
+		}
+
+
+
+        .ui-accordion-content {
+            background-image: url('../../Content/img/destaque-bullet-bgcont-pq.jpg');
+            background-repeat: repeat-y;
+            margin-bottom: 20px;
+            padding-left: 40px;
+            font-family: 'latolight';
+            padding-bottom: 20px;
+            padding-top: 20px;
+        }
+
+        .ui-state-active {
+            border: none;
+        }
+
+        .ui-widget-content {
+            border: none !important;
+        }
+
+        .ui-icon-triangle-1-e {
+            display: none;
+        }
+
+        *:focus {
+            outline: none;
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+
+
+
+            $(".scrollbar-anos").scrollLeft(999999);
+
+            $('.scrollleft').click(function () {
+                $('.scrollbar-anos').animate({
+                    scrollLeft: '-=180'
+                }, 300, 'easeOutQuad');
+            });
+
+            $('.scrollright').click(function () {
+                $('.scrollbar-anos').animate({
+                    scrollLeft: '+=180'
+                }, 300, 'easeOutQuad');
+            });
+
+
+
+        });
+
+
+
+
+        var meses = ["","Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+
+
+
+        var atualizaValores = function (ano) {
+
+            $("#dvSaida").html("<div id='dvloading' style='text-center;margin-left:50%;margin-right:auto;'><img src='@Url.Content("~/Content/Img/loading-animation.gif")' /></div>");
+            setTimeout(_atualizaValores(ano), 100);
+            //http://localhost:61093/Comunicacao/PublicacoesAno?tipo=informativo&ano=2017
+
+        }
+
+        var _atualizaValores = function (ano) {
+
+            $.ajax({
+                url: '@Url.Action("PublicacoesAno")?tipo=informativo&ano=' + ano,
+                cache: false
+            }).done(function (obj,s) {
+
+                var htmlSaida = " <div id='accordion'>";
+
+                for (i = 12; i >= 1; i--) {
+
+                    //desneha os itens
+                    var items = $.grep(obj, function (o) {
+                        return o.id_mes == i;
+                    });
+
+                    if (items.length > 0) //existem itens
+                    {
+                        //desenha o cabecalho
+                        htmlSaida += $("#template-mes").html().replace("{{mes}}", meses[i]);
+                        htmlSaida += "<div>";
+                        //desenha os itens
+                        $(items).each(function (idx, obj) {
+
+                            htmlSaida += $("#template-item").html()
+                                .replace("{{titulo}}", obj.Titulo)
+                                .replace("{{url}}", obj.URL)       ;
+
+                        });//each itens
+                        htmlSaida += "</div>";
+
+                    }
+
+
+
+                }
+
+                htmlSaida += "</div>";
+                $("#dvloading").fadeOut("fast");
+                $("#dvSaida").html(htmlSaida);
+                $("#accordion").accordion({ 
+					heightStyle: "content" , 
+					active: false,  
+					collapsible: true
+				});
+
+                $(".lista-anos li .ativo").removeClass("ativo");
+                $(".lista-anos li .ano_" + ano ).addClass("ativo")
+
+
+            });
+
+        }//funcao
+
+
+        atualizaValores(@ViewBag.Ano1);
+
+
+
+
+    </script>
+}

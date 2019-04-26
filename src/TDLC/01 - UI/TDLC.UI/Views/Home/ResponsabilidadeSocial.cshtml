@@ -1,0 +1,129 @@
+﻿
+@{
+    ViewBag.Title = "Responsabilidade Social";
+}
+
+
+
+<section class="interna-home hidden-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("RESPONSABILIDADE_IMG_HEADER"))'>
+
+    <div class="container">
+        <div class="quemsomos-home-overlay wow " style="visibility: visible; ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h2>@ViewBag.Title</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h4>
+                            @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "RESPONSABILIDADE_TXT_CHAMADA_01"))
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<section class="interna-home visible-xs"  style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("RESP-SOCIAL_IMG_HEADER_MOBILE"))'>
+
+    <div class="container">
+        <div class="quemsomos-home-overlay wow " style="visibility: visible; ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h2>@ViewBag.Title</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h4>
+                            @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "RESPONSABILIDADE_TXT_CHAMADA_01"))
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+<section class="interna-com">
+    <div class="container">
+
+        <div class="row">
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content justificado">
+                    <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "RESPONSABILIDADE_TXT_CHAMADA_02"))</h4>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content justificado">
+                    <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "RESPONSABILIDADE_TXT_CHAMADA_03"))</h4>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="row">
+            <div class="col-md-12 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content">
+
+                    <div class="destaque-header-bg nowrap">
+                        Instituições contempladas
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+
+        @for (int i = 1; i <= 3; i++)
+        {
+
+            <div class="row responsabilidade-instituicao">
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content">
+                        <div class="resp-logo-container">
+                            <img src='~/content/uploads/@Html.Raw(ConteudoInstitucionalHelper.GetImage("RESPONSABILIDADE_INSTITUICAO_0" + i.ToString() ))' />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content justificado">
+
+                        <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "RESPONSABILIDADE_INSTITUICAO_0" + i.ToString() ))</h4>
+
+                    </div>
+                </div>
+            </div>
+
+        }
+
+
+
+
+
+
+
+
+    </div>
+</section>

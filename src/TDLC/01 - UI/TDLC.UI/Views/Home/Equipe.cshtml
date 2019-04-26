@@ -1,0 +1,174 @@
+﻿@model TDLC.UI.Models.EquipeSiteViewmodel
+
+
+@{
+    ViewBag.Title = "Equipe";
+}
+
+
+
+<section class="contato-home hidden-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("EQUIPE_IMG_HEADER"))'>
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+<section class="contato-home visible-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("QUEM-SOMOS_IMG_HEADER_MOBILE"))'>
+    <div class="container">
+	<div class="row">
+            <div class="col-md-11 col-md-offset-1">
+		<div class="contato-home-head wow zoomIn">
+                    <h2>@ViewBag.Title</h2>
+		</div>
+            </div>
+	</div>
+    </div>
+</section>
+
+
+
+
+
+<section class="interna-com">
+
+    <div class="container">
+        <!-- Socios -->
+        @foreach (var socio in Model.Socios)
+        {
+
+            <div class="row">
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content">
+
+                        <img src="~/content/Uploads/@socio.FotoDestaque" alt="@socio.Nome" title="@socio.Nome" />
+
+                    </div>
+                </div>
+
+
+                <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                    <div class="interna-com-content">
+                        <h4 class="text-uppercase txt-socio">
+                            @socio.Conteudos[0].Cargo
+                        </h4>
+
+                        <br />
+                        <span class="txt-nome-socio txt-titulo1">
+                            @socio.Nome
+                        </span>
+
+                        <h4 class="txt-curriculo-socio justificado">@Html.Raw(socio.Conteudos[0].Descricao)</h4>
+
+                        <p class="txt-email">
+                            E-mail: <a href="mailto:@socio.Email">@socio.Email</a>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        }
+
+
+
+
+    </div>
+</section>
+
+<section class="interna-com interna-com-bg">
+
+    <div class="container">
+
+
+
+
+        <div class="row">
+            <div class="col-md-12 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content">
+
+                    <div class="destaque-header nowrap">
+                        Advogados
+                    </div>
+
+                </div>
+            </div>
+
+
+
+            @{
+                var esq = Model.Advogados.Take(   Convert.ToInt32(   Model.Advogados.Count / 2.00 )  ).ToList();
+                var dir = Model.Advogados.Skip(   Convert.ToInt32( Model.Advogados.Count / 2.00) ).ToList();
+
+
+            }
+
+
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content">
+                    @foreach (var adv in esq)
+                    {
+                        <p class="txt-advogado" title="@adv.Nome">
+                            <span class="txt-nome-advogado">@adv.Nome </span>
+                            <br />
+                            <span class="txt-email-advogado">Email: <a href="@adv.Email">@adv.Email </a></span>
+                        </p>
+                    }
+                </div>
+            </div>
+
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="interna-com-content">
+                    @foreach (var adv in dir)
+                    {
+                        <p class="txt-advogado" title="@adv.Nome">
+                            <span class="txt-nome-advogado">@adv.Nome </span>
+                            <br />
+                            <span class="txt-email-advogado">Email: <a href="@adv.Email">@adv.Email </a></span>
+                        </p>
+                    }
+                </div>
+            </div>
+
+
+
+
+            <!-- coldir -->
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+</section>
+

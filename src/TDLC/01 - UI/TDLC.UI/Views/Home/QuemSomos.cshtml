@@ -1,0 +1,97 @@
+﻿
+@{
+    ViewBag.Title = "Quem somos";
+}
+
+
+
+<section class="quemsomos-home hidden-xs">
+    <div class="container">
+        <div class="quemsomos-home-overlay wow " style="visibility: visible; ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h2>Quem Somos</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h4>
+                            @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_01"))
+
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+ 
+ 
+ 
+
+
+ <section class="quemsomos-home visible-xs" style='background-image:url(/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("QUEM-SOMOS_IMG_HEADER_MOBILE"))'>
+    <div class="container">
+        <div class="quemsomos-home-overlay wow " style="visibility: visible; ">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h2>Quem Somos</h2>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="quemsomos-home-content">
+                        <h4>
+                            @Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_01"))
+
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+<section class="quemsomos-com">
+    <div class="container">
+        <div class="row" style="display:none">
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="quemsomos-com-content">
+                    <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_02"))</h4>
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="quemsomos-com-content">
+                    <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_03"))</h4>
+                </div>
+            </div>
+        </div>
+        <div class="row quemsomos-cnt">
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="quemsomos-com-content">
+                    <h2>@Html.Raw( ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_TITULO"))</h2>
+                    <img src='~/Content/Uploads/@ConteudoInstitucionalHelper.GetImage("QUEMSOMOS_IMG_ESQUERDA")' alt="">
+                </div>
+            </div>
+            <div class="col-md-6 wow fadeInUp" style="visibility: visible; animation-name: fadeInUp;">
+                <div class="quemsomos-com-content justificado">
+                    <h4>
+                        <h4>@Html.Raw(ConteudoInstitucionalHelper.GetText(Convert.ToString(Session["cultura"]), "QUEMSOMOS_TXT_CHAMADA_04"))</h4>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
